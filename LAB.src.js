@@ -251,7 +251,7 @@
 			}
 			return sargs;
 		}
-				
+		
 		publicAPI = {
 			script:function() {
 				fCLEARTIMEOUT(end_of_chain_check_interval);
@@ -299,6 +299,22 @@
 				if (queueExec && !scripts_loading) exec.push(fn);
 				else queueAndExecute(fn);
 				return e;
+			},
+			in:function(dir, append) {
+			   if (!dir)
+			      dir = '';
+			   else if (dir && !/\/$/.test(dir))
+			      dir += "/";
+			    
+			   if (append) {
+			      _base_path+= dir;
+			      opts.base+= dir;
+			   } else {
+      			_base_path = dir;
+      			opts.base = dir;
+      		}
+      		
+			   return publicAPI;
 			}
 		};
 		if (queueExec) {
@@ -343,6 +359,9 @@
 		},
 		wait:function(){ // will ensure that the chain's previous scripts are executed before execution of scripts in subsequent chain links
 			return engine().wait.apply(nNULL,arguments);
+		},
+		in:function(){
+		   return engine().in.apply(nNULL,arguments);
 		}
 	};
 	

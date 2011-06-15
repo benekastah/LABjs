@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="LAB.src.js"></script>
+<script src="../LAB.src.js"></script>
 </head>
 <body>
 <script>
-$LAB.script("test1script.php");
+$LAB
+	.in("a")
+		.script("1.js")
+		.script("2.js").wait()
+		.script("3.js")
+		.in("sub", true)
+			.script("1.js")
+	.in()
+		.script("1.js")
+	.in("b")
+		.script("1.js").wait()
+	.in("c")
+		.script("1.js")
+		.script("2.js");
 </script>
 </html>
